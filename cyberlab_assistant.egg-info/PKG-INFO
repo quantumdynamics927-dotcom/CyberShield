@@ -1,0 +1,164 @@
+Metadata-Version: 2.4
+Name: cyberlab-assistant
+Version: 1.0.0
+Summary: Cross-platform cybersecurity assistant with cloud LLM support
+Author-email: CyberLab Team <cyberlab@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/cyberlab/cyberlab-assistant
+Project-URL: Documentation, https://github.com/cyberlab/cyberlab-assistant#readme
+Project-URL: Repository, https://github.com/cyberlab/cyberlab-assistant
+Project-URL: Issues, https://github.com/cyberlab/cyberlab-assistant/issues
+Keywords: security,cybersecurity,llm,cli,ai
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Security
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: click>=8.0.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: tqdm>=4.66.0
+Provides-Extra: anthropic
+Requires-Dist: anthropic>=0.18.0; extra == "anthropic"
+Provides-Extra: openai
+Requires-Dist: openai>=1.0.0; extra == "openai"
+Provides-Extra: ollama
+Requires-Dist: requests>=2.31.0; extra == "ollama"
+Provides-Extra: local
+Requires-Dist: torch>=2.0.0; extra == "local"
+Requires-Dist: sentencepiece>=0.2.0; extra == "local"
+Provides-Extra: all
+Requires-Dist: anthropic>=0.18.0; extra == "all"
+Requires-Dist: openai>=1.0.0; extra == "all"
+Requires-Dist: requests>=2.31.0; extra == "all"
+Requires-Dist: torch>=2.0.0; extra == "all"
+Requires-Dist: sentencepiece>=0.2.0; extra == "all"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+
+
+# CyberLab Assistant - Asistente Offline de Análisis de Seguridad
+
+Un asistente de línea de comandos basado en SLM para análisis de logs, scans y generación de reportes de seguridad, diseñado para funcionar completamente offline en entornos Kali/Parrot.
+
+## Características
+
+- 🔍 **Análisis de Salidas**
+
+  - Nmap, dirb/gobuster, nikto
+  - Logs de sistema y seguridad
+  - Wireshark/tcpdump
+  - Metasploit
+
+- 📊 **Capacidades**
+
+  - Explicación detallada de hallazgos
+  - Resumen de vulnerabilidades
+  - Sugerencia de siguientes pasos
+  - Generación de playbooks
+
+- 🛠 **Características Técnicas**
+
+  - Funciona 100% offline
+  - Integración con pipes Unix
+  - Cache local persistente
+  - Respuestas en español
+
+## Instalación
+
+```bash
+
+# Clonar repositorio
+
+git clone https://github.com/your-repo/cyberlab-assistant
+cd cyberlab-assistant
+
+# Instalar
+
+sudo ./install.sh
+
+# Verificar instalación
+
+explain --version
+
+```text
+
+## Uso
+
+### Análisis de Escaneos
+
+```bash
+
+# Analizar salida de nmap
+
+nmap -sV 192.168.1.0/24 | explain
+
+# Guardar análisis en archivo
+
+nmap -sV -sC target.com | explain > reporte.txt
+
+```text
+
+### Análisis de Logs
+
+```bash
+
+# Analizar logs de autenticación
+
+tail -f /var/log/auth.log | explain
+
+# Analizar capturas de red
+
+tcpdump -r capture.pcap | explain
+
+```text
+
+### Generación de Playbooks
+
+```bash
+
+# Generar siguientes pasos basados en hallazgos
+
+cat nmap_results.txt | next-steps
+
+# Sugerir comandos adicionales
+
+dirb http://target.com | next-steps --format commands
+
+```text
+
+## Configuración
+
+El asistente se puede configurar editando `/etc/cyberlab-assistant/config.json`:
+
+```json
+
+{
+  "cache_dir": "/tmp/cyberlab-cache",
+  "response_format": "detailed",
+  "language": "es",
+  "max_context": 2048
+}
+
+```text
+
+## Contribuir
+
+Las contribuciones son bienvenidas. Por favor, revisa CONTRIBUTING.md para más detalles.
+
+## Licencia
+
+Este proyecto está licenciado bajo MIT License - ver LICENSE.md para detalles.

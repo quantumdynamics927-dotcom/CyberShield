@@ -1,0 +1,23 @@
+# Windows-specific requirements for CyberLab Assistant
+
+# Core dependencies
+click>=8.0.0
+rich>=13.7.0
+pyyaml>=6.0.1
+requests>=2.31.0
+tqdm>=4.66.5
+
+# Optional: Cloud LLM providers
+# Install the provider(s) you want to use:
+# anthropic>=0.18.0  # For Claude support
+# openai>=1.0.0      # For OpenAI GPT support
+
+# Optional: Local PyTorch model (for offline mode)
+# torch>=2.0.0
+# sentencepiece>=0.2.0
+# numpy>=1.26.4
+
+# API server
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.6
+python-multipart>=0.0.9

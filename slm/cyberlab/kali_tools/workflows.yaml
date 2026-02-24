@@ -1,0 +1,198 @@
+# Predefined security workflows
+full_recon:
+  description: "Full reconnaissance workflow"
+  steps:
+    - name: "Host Discovery"
+      tool: "nmap"
+      options: ["-sn"]
+      
+    - name: "Port Scan"
+      tool: "nmap"
+      options: ["-sS", "-sV", "-p-"]
+      
+    - name: "Service Enumeration"
+      tool: "nmap"
+      options: ["-sC"]
+      
+    - name: "Web Analysis"
+      tool: "nikto"
+      options: ["-Tuning", "123bde"]
+      
+    - name: "SQL Injection Check"
+      tool: "sqlmap"
+      options: ["--batch", "--random-agent"]
+
+web_audit:
+  description: "Web application security audit"
+  steps:
+    - name: "Web Server Scan"
+      tool: "nikto"
+      options: ["-Tuning", "123bde"]
+      
+    - name: "Directory Enumeration"
+      tool: "gobuster"
+      options: ["dir", "-w", "/usr/share/wordlists/dirb/common.txt"]
+      
+    - name: "SQL Injection"
+      tool: "sqlmap"
+      options: ["--batch", "--random-agent"]
+      
+    - name: "WordPress Scan"
+      tool: "wpscan"
+      options: ["--enumerate", "vp,u,vt,tt"]
+
+network_audit:
+  description: "Network security audit"
+  steps:
+    - name: "Network Discovery"
+      tool: "nmap"
+      options: ["-sn"]
+      
+    - name: "Service Detection"
+      tool: "nmap"
+      options: ["-sS", "-sV"]
+      
+    - name: "Vulnerability Scan"
+      tool: "nmap"
+      options: ["--script", "vuln"]
+      
+    - name: "Password Audit"
+      tool: "hydra"
+      options: ["-e", "nsr"]
+
+wireless_audit:
+  description: "Wireless network security audit"
+  steps:
+    - name: "Network Discovery"
+      tool: "aircrack-ng"
+      options: []
+      
+    - name: "WEP Analysis"
+      tool: "aircrack-ng"
+      options: ["-a", "1"]
+      
+    - name: "WPA Analysis"
+      tool: "aircrack-ng"
+      options: ["-a", "2"]
+
+vulnerability_scan:
+  description: "Comprehensive vulnerability assessment"
+  steps:
+    - name: "Service Detection"
+      tool: "nmap"
+      options: ["-sV"]
+      
+    - name: "Vulnerability Scan"
+      tool: "nmap"
+      options: ["--script", "vuln"]
+      
+    - name: "Web Vulnerabilities"
+      tool: "nikto"
+      options: ["-Tuning", "123bde"]
+      
+    - name: "Known Exploits"
+      tool: "metasploit"
+      module: "auxiliary/scanner/ssh/ssh_version"
+      options: ["RHOSTS"]
+
+password_audit:
+  description: "Password security audit"
+  steps:
+    - name: "SSH Brute Force"
+      tool: "hydra"
+      service: "ssh"
+      options: ["-e", "nsr"]
+      
+    - name: "FTP Brute Force"
+      tool: "hydra"
+      service: "ftp"
+      options: ["-e", "nsr"]
+      
+    - name: "HTTP Form Attack"
+      tool: "hydra"
+      service: "http-post-form"
+      options: []
+
+stealth_recon:
+  description: "Stealthy reconnaissance"
+  steps:
+    - name: "Slow Host Discovery"
+      tool: "nmap"
+      options: ["-sS", "-T2"]
+      
+    - name: "Quiet Service Detection"
+      tool: "nmap"
+      options: ["-sV", "-T2", "--version-intensity", "2"]
+      
+    - name: "Passive DNS"
+      tool: "dig"
+      options: ["axfr"]
+
+malware_analysis:
+  description: "Malware and forensics analysis"
+  steps:
+    - name: "String Analysis"
+      tool: "strings"
+      options: ["-a"]
+      
+    - name: "Binary Analysis"
+      tool: "radare2"
+      options: ["-A"]
+      
+    - name: "Memory Analysis"
+      tool: "volatility"
+      options: ["imageinfo"]
+
+webapp_full:
+  description: "Full web application assessment"
+  steps:
+    - name: "SSL Analysis"
+      tool: "sslscan"
+      options: []
+      
+    - name: "Directory Discovery"
+      tool: "gobuster"
+      options: ["dir", "-w", "/usr/share/wordlists/dirb/common.txt"]
+      
+    - name: "CMS Detection"
+      tool: "whatweb"
+      options: ["-a", "3"]
+      
+    - name: "WordPress Scan"
+      tool: "wpscan"
+      options: ["--enumerate", "vp,u,vt,tt"]
+      
+    - name: "SQL Injection"
+      tool: "sqlmap"
+      options: ["--batch", "--random-agent"]
+      
+    - name: "Web Vulnerabilities"
+      tool: "nikto"
+      options: ["-Tuning", "123bde"]
+
+network_full:
+  description: "Full network assessment"
+  steps:
+    - name: "Host Discovery"
+      tool: "nmap"
+      options: ["-sn"]
+      
+    - name: "Port Scan"
+      tool: "nmap"
+      options: ["-sS", "-sV", "-p-"]
+      
+    - name: "UDP Scan"
+      tool: "nmap"
+      options: ["-sU", "--top-ports", "100"]
+      
+    - name: "Service Enumeration"
+      tool: "nmap"
+      options: ["-sC"]
+      
+    - name: "OS Detection"
+      tool: "nmap"
+      options: ["-O"]
+      
+    - name: "Vulnerability Scan"
+      tool: "nmap"
+      options: ["--script", "vuln"]

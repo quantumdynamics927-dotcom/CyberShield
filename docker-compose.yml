@@ -1,0 +1,13 @@
+services:
+  slm:
+    build: ./slm
+    volumes:
+      - ./slm:/app
+      - /tmp/cyberlab-cache:/cache
+    environment:
+      - HOST=127.0.0.1
+      - PORT=8010
+      - CACHE_DIR=/cache
+      - MODE=offline
+    restart: unless-stopped
+    network_mode: host

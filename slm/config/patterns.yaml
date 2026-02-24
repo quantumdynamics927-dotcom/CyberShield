@@ -1,0 +1,63 @@
+# Log parsing patterns
+nmap:
+  port_scan:
+    pattern: "^(?P<port>\d+)/(?P<protocol>\w+)\s+(?P<state>\w+)\s+(?P<service>[\w-]+).*$"
+    fields:
+      - port
+      - protocol
+      - state
+      - service
+
+  host_discovery:
+    pattern: "^Nmap scan report for (?P<host>[\w\.-]+)\s+\((?P<ip>[\d\.]+)\).*$"
+    fields:
+      - host
+      - ip
+
+nikto:
+  finding:
+    pattern: "+ (?P<id>[\w-]+): (?P<description>.+)"
+    fields:
+      - id
+      - description
+
+  vulnerability:
+    pattern: "- (?P<severity>High|Medium|Low|Info): (?P<description>.+)"
+    fields:
+      - severity
+      - description
+
+wireshark:
+  packet:
+    pattern: "^(?P<timestamp>[\d\.]+)\s+(?P<source>[\w\.-]+)\s+→\s+(?P<destination>[\w\.-]+)\s+(?P<protocol>[\w-]+)\s+(?P<length>\d+)\s+(?P<info>.+)$"
+    fields:
+      - timestamp
+      - source
+      - destination
+      - protocol
+      - length
+      - info
+
+tcpdump:
+  packet:
+    pattern: "^(?P<timestamp>[\d:\.]+)\s+(?P<protocol>[\w-]+)\s+(?P<source>[\d\.:]+)\s+>\s+(?P<destination>[\d\.:]+):\s+(?P<flags>[\w\s]+),\s+length\s+(?P<length>\d+)$"
+    fields:
+      - timestamp
+      - protocol
+      - source
+      - destination
+      - flags
+      - length
+
+metasploit:
+  exploit:
+    pattern: "\[\\*\]\s+(?P<module>[\w/]+)\s+(?P<status>succeeded|failed).*$"
+    fields:
+      - module
+      - status
+      
+  session:
+    pattern: "\[\\+\]\s+(?P<type>[\w-]+)\s+session\s+(?P<id>\d+)\s+opened.*$"
+    fields:
+      - type
+      - id

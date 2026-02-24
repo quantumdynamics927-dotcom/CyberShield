@@ -1,0 +1,107 @@
+# Security pattern definitions
+patterns:
+  # Network attack patterns
+  network_attacks:
+    port_scan: "(?:\d{1,3}\.){3}\d{1,3}.*(?:scan|probe)"
+    dos_attack: "(?:DOS|denial of service|flood).*attack"
+    brute_force: "(?:authentication|login).*fail.*from.*(?:\d{1,3}\.){3}\d{1,3}"
+    
+  # System intrusion patterns
+  system_intrusion:
+    privilege_escalation: "(?:sudo|su).*(?:failed|unauthorized)"
+    file_system: "(?:access denied|permission denied).*(?:/[^\s]+)"
+    shell_execution: "(?:sh|bash|cmd).*(?:suspicious|unauthorized)"
+
+# Risk patterns by severity
+risks:
+  critical:
+    - "(?:root|admin).*access.*(?:unauthorized|invalid)"
+    - "(?:encryption|ssl|tls).*(?:failed|invalid|expired)"
+    - "(?:firewall|iptables).*(?:disabled|bypass)"
+  
+  high:
+    - "(?:password|credential).*(?:incorrect|invalid)"
+    - "(?:database|sql).*(?:error|failed)"
+    - "(?:certificate|ssl).*(?:invalid|expired)"
+  
+  medium:
+    - "(?:warning|notice).*security"
+    - "(?:connection|session).*(?:timeout|expired)"
+    - "(?:update|patch).*(?:pending|required)"
+  
+  low:
+    - "(?:info|debug).*security"
+    - "(?:login|access).*successful"
+    - "(?:scan|check).*completed"
+
+# Indicators of Compromise (IoC) patterns
+iocs:
+  ip_address:
+    - "(?:\d{1,3}\.){3}\d{1,3}"
+  domain:
+    - "(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}"
+  hash:
+    - "[a-fA-F0-9]{32}"  # MD5
+    - "[a-fA-F0-9]{40}"  # SHA1
+    - "[a-fA-F0-9]{64}"  # SHA256
+  url:
+    - "(?:http|https|ftp)://[^\s/$.?#].[^\s]*"
+  email:
+    - "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+
+# Attack patterns by category
+attacks:
+  reconnaissance:
+    - "(?:nmap|scan).*(?:\d{1,3}\.){3}\d{1,3}"
+    - "(?:whois|dig|traceroute).*(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}"
+  
+  exploitation:
+    - "(?:exploit|vulnerability|cve).*(?:\d{4}-\d+)"
+    - "(?:sql injection|xss|csrf).*attack"
+    - "(?:buffer overflow|memory corruption).*detected"
+  
+  persistence:
+    - "(?:backdoor|rootkit).*(?:detected|found)"
+    - "(?:cron|scheduled task).*(?:suspicious|unauthorized)"
+    - "(?:startup|autorun).*(?:modified|added)"
+  
+  command_control:
+    - "(?:c2|command.*control).*(?:traffic|communication)"
+    - "(?:beacon|callback).*(?:\d{1,3}\.){3}\d{1,3}"
+    - "(?:dns|http).*(?:exfiltration|tunnel)"
+
+# Traffic analysis patterns
+traffic:
+  protocols:
+    suspicious:
+      - "(?:irc|telnet).*(?:\d{1,3}\.){3}\d{1,3}"
+      - "(?:tftp|ftp).*(?:anonymous|guest)"
+    encrypted:
+      - "(?:ssl|tls).*(?:established|handshake)"
+      - "(?:ssh|sftp).*connection"
+  
+  ports:
+    high_risk:
+      - "(?:3389|5900).*(?:incoming|outbound)"  # RDP, VNC
+      - "(?:445|139).*external"  # SMB
+    medium_risk:
+      - "(?:21|23|25).*(?:incoming|outbound)"  # FTP, Telnet, SMTP
+    low_risk:
+      - "(?:80|443).*established"  # HTTP(S)
+
+# System configuration patterns
+configurations:
+  critical_services:
+    - "(?:sshd|httpd|nginx).*config"
+    - "(?:firewall|iptables).*rules"
+    - "(?:ssl|tls).*settings"
+  
+  permissions:
+    - "(?:chmod|chown).*(?:[0-7]{3,4}|root)"
+    - "(?:sudo|su).*configuration"
+    - "(?:group|user).*(?:added|modified)"
+  
+  network:
+    - "(?:interface|eth\d+).*(?:up|down)"
+    - "(?:route|gateway).*(?:added|deleted)"
+    - "(?:dns|nameserver).*configured"

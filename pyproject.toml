@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cyberlab-assistant"
+version = "1.0.0"
+description = "Cross-platform cybersecurity assistant with cloud LLM support"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "CyberLab Team", email = "cyberlab@example.com"}
+]
+keywords = ["security", "cybersecurity", "llm", "cli", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+dependencies = [
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",
+    "requests>=2.31.0",
+    "tqdm>=4.66.0",
+]
+
+# Optional dependencies for cloud LLM providers
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.18.0"]
+openai = ["openai>=1.0.0"]
+ollama = ["requests>=2.31.0"]
+# Local PyTorch model (optional - for offline mode)
+local = [
+    "torch>=2.0.0",
+    "sentencepiece>=0.2.0",
+]
+# Full installation with all features
+all = [
+    "anthropic>=0.18.0",
+    "openai>=1.0.0",
+    "requests>=2.31.0",
+    "torch>=2.0.0",
+    "sentencepiece>=0.2.0",
+]
+# Development dependencies
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+cyberlab = "slm.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/cyberlab/cyberlab-assistant"
+Documentation = "https://github.com/cyberlab/cyberlab-assistant#readme"
+Repository = "https://github.com/cyberlab/cyberlab-assistant"
+Issues = "https://github.com/cyberlab/cyberlab-assistant/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["slm*"]
+
+[tool.setuptools.package-data]
+slm = ["config/*.yaml"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
