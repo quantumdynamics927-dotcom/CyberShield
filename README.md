@@ -1,114 +1,122 @@
+# CyberShield – Offline Security Analysis Assistant
 
-# CyberLab Assistant - Asistente Offline de Análisis de Seguridad
+A command-line assistant (SLM-based) for analyzing logs, scan outputs, and generating security reports. Designed to run completely offline on Kali/Parrot environments.
 
-Un asistente de línea de comandos basado en SLM para análisis de logs, scans y generación de reportes de seguridad, diseñado para funcionar completamente offline en entornos Kali/Parrot.
+---
 
-## Características
+## Features
 
-- 🔍 **Análisis de Salidas**
+### Output Analysis
+- Nmap, dirb/gobuster, Nikto
+- System and security logs
+- Wireshark/tcpdump captures
+- Metasploit output
 
-  - Nmap, dirb/gobuster, nikto
-  - Logs de sistema y seguridad
-  - Wireshark/tcpdump
-  - Metasploit
+### Capabilities
+- Detailed explanation of findings
+- Vulnerability summaries
+- Suggestions for next steps
+- Playbook generation
 
-- 📊 **Capacidades**
+### Technical Characteristics
+- 100% offline operation
+- Integration with Unix pipes
+- Persistent local cache
+- Modular and extensible design
 
-  - Explicación detallada de hallazgos
-  - Resumen de vulnerabilidades
-  - Sugerencia de siguientes pasos
-  - Generación de playbooks
+---
 
-- 🛠 **Características Técnicas**
-
-  - Funciona 100% offline
-  - Integración con pipes Unix
-  - Cache local persistente
-  - Respuestas en español
-
-## Instalación
+## Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/quantumdynamics927-dotcom/CyberShield
+cd CyberShield
 
-# Clonar repositorio
-
-git clone https://github.com/your-repo/cyberlab-assistant
-cd cyberlab-assistant
-
-# Instalar
-
+# Install dependencies
 sudo ./install.sh
 
-# Verificar instalación
-
+# Verify installation
 explain --version
+```
 
-```text
+---
 
-## Uso
+## Usage
 
-### Análisis de Escaneos
+### Scan Analysis
 
 ```bash
-
-# Analizar salida de nmap
-
+# Analyze Nmap output
 nmap -sV 192.168.1.0/24 | explain
 
-# Guardar análisis en archivo
+# Save analysis to a file
+nmap -sV -sC target.com | explain > report.txt
+```
 
-nmap -sV -sC target.com | explain > reporte.txt
-
-```text
-
-### Análisis de Logs
+### Log Analysis
 
 ```bash
-
-# Analizar logs de autenticación
-
+# Analyze authentication logs
 tail -f /var/log/auth.log | explain
 
-# Analizar capturas de red
-
+# Analyze network captures
 tcpdump -r capture.pcap | explain
+```
 
-```text
-
-### Generación de Playbooks
+### Playbook Generation
 
 ```bash
-
-# Generar siguientes pasos basados en hallazgos
-
+# Generate next steps based on findings
 cat nmap_results.txt | next-steps
 
-# Sugerir comandos adicionales
-
+# Suggest additional commands
 dirb http://target.com | next-steps --format commands
+```
 
-```text
+---
 
-## Configuración
+## Configuration
 
-El asistente se puede configurar editando `/etc/cyberlab-assistant/config.json`:
+Edit the config file at:
+
+```
+/etc/cyberlab-assistant/config.json
+```
+
+Example:
 
 ```json
-
 {
   "cache_dir": "/tmp/cyberlab-cache",
   "response_format": "detailed",
-  "language": "es",
+  "language": "en",
   "max_context": 2048
 }
+```
 
-```text
+---
 
-## Contribuir
+## Requirements
 
-Las contribuciones son bienvenidas. Por favor, revisa CONTRIBUTING.md para más detalles.
+- Kali Linux / Parrot OS (recommended)
+- Python 3.8+
+- Common Kali tools: nmap, dirb, gobuster, nikto, tcpdump
 
-## Licencia
+---
 
-Este proyecto está licenciado bajo MIT License - ver LICENSE.md para detalles.
-# CyberShield
+## Contributing
+
+Contributions are welcome! Please open an issue or pull request with improvements, new analysis patterns, or additional tool integrations.
+
+---
+
+## Disclaimer
+
+This tool is intended for **legal and authorized use only**, such as lab environments, CTFs, and penetration testing engagements with explicit written permission. Misuse is the sole responsibility of the user.
+
+---
+
+## License
+
+MIT License – see `LICENSE.md` for details.
