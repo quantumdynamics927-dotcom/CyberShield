@@ -1,6 +1,6 @@
 # CyberShield – Offline Security Analysis Assistant
 
-A command-line assistant (SLM-based) for analyzing logs, scan outputs, and generating security reports. Designed to run completely offline on Kali/Parrot environments.
+A command-line assistant (SLM-based) for analyzing logs, scan outputs, and generating security reports. Designed to run completely offline.
 
 ---
 
